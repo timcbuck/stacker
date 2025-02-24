@@ -6,3 +6,4 @@
 Class = require 'lib/class'
 
 require "segment"
+require "timer"
