@@ -1,11 +1,11 @@
 require 'Dependencies'
 
 function love.load()
-    segment = Segment(0, 10, 3)
+    segment = Segment(2, 11, 3)
 end
 
 function love.update(dt)
-    segment:update()
+    segment:update(dt)
 end
 
 function love.draw()
