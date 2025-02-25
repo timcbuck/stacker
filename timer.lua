@@ -1,7 +1,7 @@
 Timer = Class{}
 
 function Timer:init(t)
-    self.current = math.max(t, 0.1)
+    self.current = math.max(t, 0.05)
     self.max = self.current
     self.complete = false
 end
