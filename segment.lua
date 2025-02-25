@@ -2,12 +2,12 @@ Segment = Class{}
 
 segmentSprite = love.graphics.newImage("sprites/segment.png")
 
-function Segment:init(col, row, size)
+function Segment:init(col, row, size, speed)
     self.col = col
     self.row = row
     self.size = size
     self.direction = 1 -- randomly have direction as 1 or -1
-    self.moveTimer = Timer(0.6)
+    self.moveTimer = Timer(speed)
     self.placed = false
 end
 

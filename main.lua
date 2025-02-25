@@ -5,9 +5,10 @@ debug = true
 function love.load()
     currentRow = 11 -- keep track of where the current segment is
     currentSize = 3 -- keep track of segment size (starts at 3, then 2, then 1)
+    currentTimer = 0.6 -- keep track of timer for moving segment
 
     segments = {}
-    table.insert(segments, Segment(2, currentRow, currentSize))
+    table.insert(segments, Segment(2, currentRow, currentSize, currentTimer))
 
     sounds = {
         ['place'] = love.audio.newSource('audio/place.wav', 'static'),
@@ -44,8 +45,9 @@ function love.keypressed(key)
         currentRow = currentRow - 1
         if currentRow == 3 then reduceSize() end
         if currentRow == 6 then reduceSize() end
+        currentTimer = currentTimer - 0.05
         local col = math.random(1, 4)
-        table.insert(segments, Segment(col, currentRow, currentSize))
+        table.insert(segments, Segment(col, currentRow, currentSize, currentTimer))
 
     end
 end
