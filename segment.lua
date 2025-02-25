@@ -7,21 +7,26 @@ function Segment:init(col, row, size)
     self.row = row
     self.size = size or 1
     self.direction = 1
-    self.moveTimer = Timer(0.5)
+    self.moveTimer = Timer(0.4)
+    self.placed = false
 end
 
 function Segment:update(dt)
-    -- Decrease timer time
-    self.moveTimer:update(dt)
+    if not self.placed then
+        -- Decrease timer time
+        self.moveTimer:update(dt)
 
-    -- If timer has reached zero, move the segment
-    if self.moveTimer.complete then
-        -- Ensure segment moves back and forth when reaching edge of the window
-        if self.col == 0 or self.col + self.size == 7 then
-            self.direction = -self.direction
+        -- If timer has reached zero, move the segment
+        if self.moveTimer.complete then
+            -- Ensure segment moves back and forth when reaching edge of the window
+            if self.col == 0 or self.col + self.size == 7 then
+                self.direction = -self.direction
+            end
+            -- Increase/decrease column position by 1
+            self.col = self.col + 1 * self.direction
         end
-        -- Increase/decrease column position by 1
-        self.col = self.col + 1 * self.direction
+    else
+
     end
 end
 
@@ -40,4 +45,8 @@ function Segment:render()
         love.graphics.draw(segmentSprite, 64 * (self.col + 1), 64 * self.row)
         love.graphics.draw(segmentSprite, 64 * (self.col + 2), 64 * self.row)
     end
+end
+
+function Segment:place()
+    self.placed = true
 end

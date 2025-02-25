@@ -3,22 +3,36 @@ require 'Dependencies'
 debug = true
 
 function love.load()
-    segment = Segment(2, 11, 3)
+    col = 11
+    segments = {}
+    table.insert(segments, Segment(2, col, 3))
 end
 
 function love.update(dt)
-    segment:update(dt)
+    for _, s in pairs(segments) do
+        s:update(dt)
+    end
 end
 
 function love.draw()
     if debug then displayFPS() end
 
-    segment:render()
+    for _, s in pairs(segments) do
+        s:render()
+    end
 end
 
 function love.keypressed(key)
     if key == "escape" then
-        -- quit game
+        love.event.quit()
+    end
+
+    if key == "space" then
+        -- Place the current segment in play, which will be the last element in the segments table
+        segments[#segments]:place()
+        col = col - 1
+        local row = math.random(1, 4)
+        table.insert(segments, Segment(row, col, 3))
     end
 end
 
